@@ -22,4 +22,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/drinks', 'DrinkController@index');
 Route::get('/drinks/{id}', 'DrinkController@show');
 
-Route::middleware('auth')->post('/imbibe', ['before' => 'csrf', 'uses' => 'UserController@imbibe'])->name('imbibe');
+Route::middleware('auth')->post('/imbibe', ['before' => 'csrf', 'uses' => 'UserController@store'])->name('imbibe');

@@ -12,10 +12,16 @@
                         {{ Form::token() }}
                         {{ Form::label('drink_id', 'Select a drink: ') }}
                         {{ Form::select('drink_id', $select) }}
+                        @error('drink_id')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </fieldset>
                     <fieldset>
                         {{ Form::label('servings', 'Number of Servings: ') }}
                         {{ Form::text('servings') }}
+                        @error('servings')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </fieldset>
                     <fieldset>
                         {{ Form::submit('Log it!') }}
