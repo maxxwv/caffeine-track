@@ -42,6 +42,7 @@
 
             .content {
                 text-align: center;
+                padding: 0 5%;
             }
 
             .title {
@@ -81,17 +82,15 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Alex Wharff
                 </div>
 
+                <p>Hi, all. This is the skills assessment that was sent to me. You can see the code <a href="https://github.com/maxxwv/" alt="Link to skills assessment code" target="_blank" rel="noopener nofollow">here</a>. Thank you for the opportunity and the time, and I look forward to speaking with you soon!</p>
+                <p>Oh, yeah. you're gonna want to create a new user in oreder to track your beverages and caffeine intake. Once you've done that, you can log in, log out, and track your caffeine intake daily. The system will only show caffiene intake from the current day, so you can start over fresh every day if you want to.</p>
                 <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="https://maxxwv.com" target="_blank" rel="noopener nofollow">My Site</a>
+                    <a href="https://bitbucket.org/maxxdesigns/" target="_blank" rel="noopener nofollow">BitBucket</a>
+                    <a href="https://github.com/maxxwv" target="_blank" rel="noopener nofollow">GitHub</a>
                 </div>
             </div>
         </div>
