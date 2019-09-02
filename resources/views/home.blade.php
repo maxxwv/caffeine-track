@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">Diary</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -20,6 +20,7 @@
                                 <th scope="col">Drink</th>
                                 <th scope="col">Caffeine Content</th>
                                 <th scope="col">Servings</th>
+                                <th scope="col">When</th>
                                 <th scope="col">Total Caffeine</th>
                             </tr>
                         </thead>
@@ -30,9 +31,32 @@
                                 <div class="tooltip">{{ $drink->descr }}</div></th>
                                 <td class="caffeine">{{ $drink->caffeine }}</td>
                                 <td class="servings">{{ $drink->servings_had }}</td>
+                                <td class="when">{{ date('g:i a', strtotime($drink->date_ingested)) }}</td>
                                 <td class="total">{{ $drink->servings_had * $drink->caffeine }}</td>
                             </tr>
                     @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">Details</div>
+
+                <div class="card-body">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Drink</th>
+                                <th scope="col">Amount Left</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($overview as $item)
+                            <tr>
+                                <th scope="row">{{ $item['name'] }}</th>
+                                <td class="amount-left{{ $item['class_name'] }}" data-drink_id="{{ $item['drink_id'] }}">{{ $item['left'] }}</td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
