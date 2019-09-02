@@ -1,3 +1,6 @@
+$(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+});
 
 const frm = document.getElementById('add_drink');
 frm.onsubmit = (e) => {

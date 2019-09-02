@@ -36969,6 +36969,9 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip();
+});
 var frm = document.getElementById('add_drink');
 
 frm.onsubmit = function (e) {

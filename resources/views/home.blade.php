@@ -74,8 +74,7 @@
                         <tbody id="diary">
                     @foreach($diary as $drink)
                             <tr>
-                                <th scope="row" class="drink">{{ $drink->name }}
-                                <div class="tooltip">{{ $drink->descr }}</div></th>
+                                <th scope="row" class="drink" data-toggle="tooltip" title="{{ $drink->descr }}">{{ $drink->name }}</th>
                                 <td class="caffeine">{{ floatval($drink->caffeine) }}</td>
                                 <td class="servings">{{ floatval($drink->servings_had) }}</td>
                                 <td class="when">{{ date('g:i a', strtotime($drink->date_ingested)) }}</td>
