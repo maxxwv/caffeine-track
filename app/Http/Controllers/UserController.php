@@ -38,6 +38,7 @@ class UserController extends Controller
                     'drink_name' => $drink->name,
                     'drink_id' => $drink->id,
                     'when' => (new \DateTime('now', new \DateTimeZone($request->user()->time_zone)))->format('g:i a'),
+                    'max_caffeine' => $request->user()->max_caffeine,
                     'success' => true,
                 ];
                 return response()->json(['results' => $ret]);

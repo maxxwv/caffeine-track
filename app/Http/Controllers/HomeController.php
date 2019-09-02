@@ -43,9 +43,6 @@ class HomeController extends Controller
      * per drink, then subtract that from their personal max caffeine amount.
      */
     private function collateDiary($diary, Request $request){
-        if($diary->isEmpty()){
-            $diary = Drink::all();
-        }
         $res = [];
         foreach($diary as $drink){
             $shot = !empty($drink->servings_had) ? $drink->servings_had * $drink->caffeine : 0;

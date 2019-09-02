@@ -36993,7 +36993,7 @@ frm.onsubmit = function (e) {
   }).then(function (data) {
     var r = createTableRow(data.results);
     document.getElementById('diary').append(r);
-    updateTotal(data.drink_id, data.caffeine_content);
+    updateTotal(data.results);
   });
 };
 /**
@@ -37003,13 +37003,12 @@ frm.onsubmit = function (e) {
 
 function createTableRow(data) {
   var totalCaffeine = data.servings * data.caffeine_content;
+  var th = createTH();
   var tr = document.createElement('tr');
-  var th = document.createElement('th');
   var c_content = document.createElement('td');
   var servings = document.createElement('td');
   var when = document.createElement('td');
   var caffeine = document.createElement('td');
-  th.setAttribute('scope', 'row');
   th.innerHTML = data.drink_name;
   tr.append(th);
   c_content.innerHTML = data.caffeine_content;
@@ -37022,17 +37021,46 @@ function createTableRow(data) {
   tr.append(caffeine);
   return tr;
 }
+
+function createTH() {
+  var th = document.createElement('th');
+  th.setAttribute('scope', 'row');
+  return th;
+}
 /**
  *  Update the running tracker of how much caffeine the user can have per drink
  */
 
 
-function updateTotal(drink_id, caffeine) {
-  console.log(drink_id);
-  var tgt = document.querySelector("td[data-drink_id=\"".concat(drink_id, "\"]"));
-  var crTotal = tgt.innerHtml;
-  var nwTotal = crTotal - caffeine;
+function updateTotal(data) {
+  var tgt = document.querySelector("td[data-drink_id=\"".concat(data.drink_id, "\"]"));
+
+  if (tgt === null) {
+    tgt = createDisplayDiv(data);
+  }
+
+  var crTotal = tgt.innerHTML;
+  var nwTotal = Number(crTotal) - Number(data.caffeine_content) * data.servings;
   tgt.innerHTML = nwTotal;
+}
+/**
+ *  Create a div for the drink tracker of how much caffeine the user can have for this drink
+ */
+
+
+function createDisplayDiv(data) {
+  var tr = document.createElement('tr');
+  var th = createTH();
+  th.innerHTML = data.drink_name;
+  tr.append(th);
+  var td = document.createElement('td');
+  td.classList.add('amount-left');
+  td.setAttribute('data-drink_id', data.drink_id);
+  td.innerHTML = data.max_caffeine;
+  tr.append(td);
+  var tl = document.getElementById('track-listing');
+  tl.append(tr);
+  return td;
 }
 
 /***/ }),
