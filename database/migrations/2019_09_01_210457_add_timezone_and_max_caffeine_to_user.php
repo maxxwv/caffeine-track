@@ -27,8 +27,8 @@ class AddTimezoneAndMaxCaffeineToUser extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('timezone');
-            $table->$table->dropColumn('max_caffeine');
+            $table->dropColumn('time_zone');
+            $table->dropColumn('max_caffeine');
         });
     }
 }
