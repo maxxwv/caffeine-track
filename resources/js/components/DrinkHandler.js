@@ -3,10 +3,13 @@ const frm = document.getElementById('add_drink');
 frm.onsubmit = (e) => {
   e.preventDefault();
   let data = {
-    '_token': document.getElementsByName('_token')[0].value,
+    '_token': document.querySelector('#add_drink input[name="_token"]').value,
     'drink_id': document.getElementById('drink_id').value,
     'servings': document.getElementById('servings').value
   };
+  if(!validate(data)){
+    return;
+  }
   fetch('/imbibe', {
     credentials: 'same-origin',
     method: 'POST',
@@ -24,6 +27,27 @@ frm.onsubmit = (e) => {
     document.getElementById('diary').append(r);
     updateTotal(data.results);
   });
+}
+
+/**
+ *  Validate user input before we try to send it to the server
+ */
+function validate(data){
+  if(!data['_token']){
+    alert('This appears to be a fraudulent form request!');
+    return false;
+  }
+  if(!data.servings){
+    alert('Please enter the number of servings you had.');
+    document.getElmeentById('servings').focus();
+    return false;
+  }
+  if(!data.drink_id){
+    alert('Please select a drink.');
+    document.getElementById('drink_id').focus();
+    return false;
+  }
+  return true;
 }
 
 /**
