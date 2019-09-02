@@ -61,7 +61,7 @@
                         </div>
                     @endif
 
-                    <table border="1">
+                    <table>
                         <thead>
                             <tr>
                                 <th scope="col">Drink</th>

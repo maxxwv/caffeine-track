@@ -6,3 +6,28 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+table{
+  width: 100%;
+}
+tbody{
+  tr:nth-child(even){
+    background: $cyan;
+  }
+  td{
+    text-align: center;
+  }
+}
+thead{
+  background: lighten($blue, 40%);
+  th{
+    text-align: center;
+  }
+}
+td,
+th{
+  padding: .75rem;
+}
+fieldset{
+  text-align: right;
+}

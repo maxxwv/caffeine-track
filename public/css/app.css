@@ -10644,3 +10644,32 @@ a.text-dark:focus {
   }
 }
 
+table {
+  width: 100%;
+}
+
+tbody tr:nth-child(even) {
+  background: #6cb2eb;
+}
+
+tbody td {
+  text-align: center;
+}
+
+thead {
+  background: #e2effa;
+}
+
+thead th {
+  text-align: center;
+}
+
+td,
+th {
+  padding: 0.75rem;
+}
+
+fieldset {
+  text-align: right;
+}
+
