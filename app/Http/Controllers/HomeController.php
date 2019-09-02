@@ -51,7 +51,7 @@ class HomeController extends Controller
             $res[$drink->id]['drink_id'] = $drink->id;
             $res[$drink->id]['total_caffeine_ingested'] = !empty($res[$drink->id]['total_caffeine_ingested']) ? $res[$drink->id]['total_caffeine_ingested'] + $shot : $shot;
             $res[$drink->id]['left'] = !empty($res[$drink->id]['left']) ? $res[$drink->id]['left'] - $shot : $drink->max_caffeine - $shot;
-            $res[$drink->id]['class_name'] = $res[$drink->id]['left'] >= $drink->max_caffeine ? " warning" : "";
+            $res[$drink->id]['class_name'] = $res[$drink->id]['left'] <= 0 ? " alert alert-danger" : "";
         }
         return $res;
     }
