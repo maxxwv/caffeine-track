@@ -31,6 +31,17 @@ class UserController extends Controller
         $track->caffeine_content = $drink->caffeine_amount;
         $track->servings = $request->servings;
         if($track->save()){
+            if($request->ajax()){
+                $ret = [
+                    'servings' => $request->servings,
+                    'caffeine_content' => $drink->caffeine_amount,
+                    'drink_name' => $drink->name,
+                    'drink_id' => $drink->id,
+                    'when' => (new \DateTime('now', new \DateTimeZone($request->user()->time_zone)))->format('g:i a'),
+                    'success' => true,
+                ];
+                return response()->json(['results' => $ret]);
+            }
             return redirect()->route('home');
         }
     }

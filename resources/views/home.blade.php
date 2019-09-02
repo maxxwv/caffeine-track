@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">Add a Drink</div>
                 <div class="card-body">
-                    {{ Form::open(['route' => 'imbibe']) }}
+                    {{ Form::open(['route' => 'imbibe', 'id' => 'add_drink']) }}
                     <fieldset>
                         {{ Form::token() }}
                         {{ Form::label('drink_id', 'Select a drink: ') }}
@@ -71,13 +71,13 @@
                                 <th scope="col">Total Caffeine</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="diary">
                     @foreach($diary as $drink)
                             <tr>
                                 <th scope="row" class="drink">{{ $drink->name }}
                                 <div class="tooltip">{{ $drink->descr }}</div></th>
-                                <td class="caffeine">{{ $drink->caffeine }}</td>
-                                <td class="servings">{{ $drink->servings_had }}</td>
+                                <td class="caffeine">{{ floatval($drink->caffeine) }}</td>
+                                <td class="servings">{{ floatval($drink->servings_had) }}</td>
                                 <td class="when">{{ date('g:i a', strtotime($drink->date_ingested)) }}</td>
                                 <td class="total">{{ $drink->servings_had * $drink->caffeine }}</td>
                             </tr>
