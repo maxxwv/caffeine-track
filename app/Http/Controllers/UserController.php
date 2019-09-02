@@ -18,14 +18,16 @@ class UserController extends Controller
      * @param $id   The drink ID
      * @return void
      */
-    public function imbibe($id, $servings, Request $request){
+    public function imbibe(Request $request){
         $user = User::findOrFail($request->user()->id);
-        $drink = Drink::findOrFail($id);
+        $drink = Drink::findOrFail($request->drink_id);
         $track = new CaffeineTrack();
         $track->drink_id = $drink->id;
         $track->user_id = $user->id;
         $track->caffeine_content = $drink->caffeine_amount;
-        $track->servings = $servings;
-        $track->save();
+        $track->servings = $request->servings;
+        if($track->save()){
+            return redirect()->route('home');
+        }
     }
 }

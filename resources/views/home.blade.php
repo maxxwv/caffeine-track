@@ -5,8 +5,49 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Diary</div>
+                <div class="card-header">Add a Drink</div>
+                <div class="card-body">
+                    {{ Form::open(['route' => 'imbibe']) }}
+                    <fieldset>
+                        {{ Form::token() }}
+                        {{ Form::label('drink_id', 'Select a drink: ') }}
+                        {{ Form::select('drink_id', $select) }}
+                    </fieldset>
+                    <fieldset>
+                        {{ Form::label('servings', 'Number of Servings: ') }}
+                        {{ Form::text('servings') }}
+                    </fieldset>
+                    <fieldset>
+                        {{ Form::submit('Log it!') }}
+                    </fieldset>
+                    {{ Form::close() }}
+                </div>
+            </div>
 
+            <div class="card">
+                <div class="card-header">Details</div>
+                <div class="card-body">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Drink</th>
+                                <th scope="col">Amount Left</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($overview as $item)
+                            <tr>
+                                <th scope="row">{{ $item['name'] }}</th>
+                                <td class="amount-left{{ $item['class_name'] }}" data-drink_id="{{ $item['drink_id'] }}">{{ $item['left'] }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Diary</div>
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -35,28 +76,6 @@
                                 <td class="total">{{ $drink->servings_had * $drink->caffeine }}</td>
                             </tr>
                     @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header">Details</div>
-
-                <div class="card-body">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th scope="col">Drink</th>
-                                <th scope="col">Amount Left</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($overview as $item)
-                            <tr>
-                                <th scope="row">{{ $item['name'] }}</th>
-                                <td class="amount-left{{ $item['class_name'] }}" data-drink_id="{{ $item['drink_id'] }}">{{ $item['left'] }}</td>
-                            </tr>
-                        @endforeach
                         </tbody>
                     </table>
                 </div>

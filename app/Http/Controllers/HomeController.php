@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\CaffeineTrack;
+use App\Drink;
 
 class HomeController extends Controller
 {
@@ -32,7 +33,11 @@ class HomeController extends Controller
             ->where('user_id', $request->user()->id)
             ->get();
         $overview = $this->collateDiary($diary);
-        return view('home', ['diary' => $diary, 'overview' => $overview]);
+        return view('home', [
+            'diary' => $diary,
+            'overview' => $overview,
+            'select' => $this->getDrinks(),
+        ]);
     }
     /**
      * Create the overview - we'll figure out how much _total_ caffeine the user has had
@@ -47,6 +52,17 @@ class HomeController extends Controller
             $res[$drink->id]['total_caffeine_ingested'] = !empty($res[$drink->id]['total_caffeine_ingested']) ? $res[$drink->id]['total_caffeine_ingested'] + $shot : $shot;
             $res[$drink->id]['left'] = !empty($res[$drink->id]['left']) ? $res[$drink->id]['left'] - $shot : $drink->max_caffeine - $shot;
             $res[$drink->id]['class_name'] = $res[$drink->id]['left'] >= $drink->max_caffeine ? " warning" : "";
+        }
+        return $res;
+    }
+    /**
+     * Format and return the drinks for use in the combobox on the data entry
+     */
+    private function getDrinks(){
+        $drinks = Drink::all();
+        $res = [];
+        foreach($drinks as $drink){
+            $res[$drink->id] = "{$drink->name} ({$drink->caffeine_amount}mg) - {$drink->servings} servings per container";
         }
         return $res;
     }
