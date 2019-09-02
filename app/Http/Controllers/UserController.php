@@ -28,7 +28,4 @@ class UserController extends Controller
         $track->servings = $servings;
         $track->save();
     }
-    public function diary(Request $request){
-
-    }
 }
