@@ -18,7 +18,11 @@ class UserController extends Controller
      * @param $id   The drink ID
      * @return void
      */
-    public function imbibe(Request $request){
+    public function store(Request $request){
+        $validatedData = $request->validate([
+            'drink_id' => 'required|numeric',
+            'servings' => 'required|numeric',
+        ]);
         $user = User::findOrFail($request->user()->id);
         $drink = Drink::findOrFail($request->drink_id);
         $track = new CaffeineTrack();
