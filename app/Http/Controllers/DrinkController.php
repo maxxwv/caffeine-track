@@ -17,10 +17,4 @@ class DrinkController extends Controller
     public function index(){
         return new DrinkCollection(drink::all());
     }
-    /**
-     *
-     */
-    public function show($id){
-        return new PlayerResource(Player::findOrFail($id));
-    }
 }
