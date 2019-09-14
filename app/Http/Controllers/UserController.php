@@ -24,16 +24,16 @@ class UserController extends Controller
             'servings' => 'required|numeric',
         ]);
         $user = User::findOrFail($request->user()->id);
-        $drink = Drink::findOrFail($request->drink_id);
+        $drink = Drink::findOrFail($validatedData['drink_id']);
         $track = new CaffeineTrack();
         $track->drink_id = $drink->id;
         $track->user_id = $user->id;
         $track->caffeine_content = $drink->caffeine_amount;
-        $track->servings = $request->servings;
+        $track->servings = $validatedData['servings'];
         if($track->save()){
             if($request->ajax()){
                 $ret = [
-                    'servings' => $request->servings,
+                    'servings' => $validatedData['servings'],
                     'caffeine_content' => $drink->caffeine_amount,
                     'drink_name' => $drink->name,
                     'drink_id' => $drink->id,
