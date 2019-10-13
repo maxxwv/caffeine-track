@@ -1,0 +1,52 @@
+version: '3.5'
+
+services:
+  mjfreeway:
+    build:
+      context: '.'
+    volumes:
+      - .:/var/www/html
+    ports:
+      - 8000:80
+    networks:
+      - laravel
+
+  database:
+    image: mysql:latest
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=laravel
+      - MYSQL_DATABASE=mjfreeway_test
+      - MYSQL_USER=laravel
+      - MYSQL_PASSWORD=laravel
+    command: '--default-authentication-plugin=mysql_native_password'
+    networks:
+      - laravel
+    volumes:
+      - db
+
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+    volumes:
+      - redis
+
+  pma:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8181:80
+    environment:
+      - MYSQL_USERNAME=laravel
+      - MYSQL_PASSWORD=laravel
+      - PMA_HOST=database
+    networks:
+      - laravel
+
+volumes:
+  db:
+  redis:
+
+networks:
+  laravel:
